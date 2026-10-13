@@ -1,0 +1,16 @@
+import {useState} from 'react'
+import {AsyncAction} from './components/rasa/async-action'
+import {SmartTabs} from './components/rasa/smart-tabs'
+import {Disclosure} from './components/rasa/disclosure'
+import {ScopeSlider} from './components/rasa/scope-slider'
+import {MetricCard} from './components/rasa/metric-card'
+import {ComparisonChart} from './components/rasa/comparison-chart'
+import {ShareRing} from './components/rasa/share-ring'
+import {SourceCard} from './components/rasa/source-card'
+import {AgentFlow} from './components/rasa/agent-flow'
+import {PromptComposer} from './components/rasa/prompt-composer'
+import {QuoteBuilder} from './components/rasa/quote-builder'
+import {ProductReveal} from './components/rasa/product-reveal'
+const raw=import.meta.glob('./components/rasa/*',{query:'?raw',import:'default',eager:true}) as Record<string,string>
+const items=[{id:'async-action',title:'دکمهٔ پاسخ‌گو',Component:AsyncAction},{id:'smart-tabs',title:'تب‌های جهت‌آگاه',Component:SmartTabs},{id:'disclosure',title:'پرسش بازشونده',Component:Disclosure},{id:'scope-slider',title:'محدودهٔ هوشمند',Component:ScopeSlider},{id:'metric-card',title:'کارت شاخص',Component:MetricCard},{id:'comparison-chart',title:'نمودار مقایسه',Component:ComparisonChart},{id:'share-ring',title:'حلقهٔ سهم',Component:ShareRing},{id:'source-card',title:'کارت شواهد',Component:SourceCard},{id:'agent-flow',title:'مسیر ایجنت',Component:AgentFlow},{id:'prompt-composer',title:'بوم پرامپت',Component:PromptComposer},{id:'quote-builder',title:'برآوردگر شفاف',Component:QuoteBuilder},{id:'product-reveal',title:'ویترین محصول',Component:ProductReveal}]
+export default function App(){const [q,setQ]=useState(''),[mode,setMode]=useState('dark'),[style,setStyle]=useState('glass');return <main><header><span>Rasa UI / Persian-first</span><h1>جزئیات، جان می‌گیرند.</h1><p>۱۲ کامپوننت فارسی، کد واقعی، پایهٔ FarsiUI و توسعهٔ اختصاصی رسا.</p><a href="https://rasa-promt.ir/fa/ui">گالری کامل رسا ↗</a></header><section className="tools"><label>جست‌وجو<input value={q} onChange={e=>setQ(e.target.value)}/></label><label>تم<select value={mode} onChange={e=>setMode(e.target.value)}><option value="dark">تیره</option><option value="light">روشن</option></select></label><label>سبک<select value={style} onChange={e=>setStyle(e.target.value)}><option value="glass">شیشه و نور</option><option value="editorial">تحریریه</option><option value="vivid">رنگ زنده</option></select></label></section><p className="notice">همهٔ اعداد نمایشی‌اند. منابع الهام و مجوزها در THIRD-PARTY-NOTICES.md درج شده‌اند.</p><section className="grid">{items.filter(i=>i.title.includes(q)||i.id.includes(q)).map(({id,title,Component})=><article key={id}><div className="rasa-ui preview" data-mode={mode} data-style={style}><Component/></div><h2>{title}</h2><details><summary>کد و نصب</summary><code dir="ltr">npx shadcn@latest add https://rasa-promt.ir/r/rasa-{id}.json</code><pre dir="ltr">{raw['./components/rasa/'+id+'.tsx']}</pre><details><summary>CSS مشترک</summary><pre dir="ltr">{raw['./components/rasa/rasa-ui.css']}</pre></details></details><a href={'/r/rasa-'+id+'.json'} download>دریافت رجیستری ↗</a></article>)}</section><footer>رسا / توسعهٔ مستقل روی پایهٔ FarsiUI · MIT</footer></main>}

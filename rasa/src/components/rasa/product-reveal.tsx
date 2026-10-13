@@ -1,0 +1,3 @@
+'use client'
+import './rasa-ui.css'
+export function ProductReveal({title='از داده، یک روایت بساز.',description='نمونهٔ کارت محصول برای گزارش‌های تعاملی و ارائه‌ها.',href='/fa/demo-report'}:{title?:string;description?:string;href?:string}){const safe=href.startsWith('/')&&!href.startsWith('//')||href.startsWith('https://')?href:'#';return <article className="rui-product"><div className="rui-product-art" aria-hidden>{[36,65,48,86,70].map((v,i)=><i key={i} style={{height:v+'%'}}/>)}</div><span>رسا / نمونهٔ محصول</span><h3>{title}</h3><p>{description}</p><a href={safe}>دیدن نمونه <span aria-hidden>↗</span></a></article>}

@@ -1,0 +1,4 @@
+'use client'
+import { useState } from 'react'
+import './rasa-ui.css'
+export function ComparisonChart({data=[{label:'طراحی',value:72},{label:'توسعه',value:91},{label:'تحلیل',value:63}]}:{data?:{label:string;value:number}[]}){const [selected,setSelected]=useState<number|null>(null),max=Math.max(...data.map(x=>x.value),1);return <div className="rui-comparison"><div role="group" aria-label="مقایسهٔ امتیازها">{data.map((d,i)=><button key={d.label} aria-pressed={selected===i} onClick={()=>setSelected(i)}><span>{d.label}</span><i><b style={{width:Math.max(0,d.value)/max*100+'%'}}/></i><strong>{new Intl.NumberFormat('fa-IR').format(d.value)}</strong></button>)}</div><p role="status">{selected===null?'یک ردیف را انتخاب کنید.':`${data[selected].label}: ${new Intl.NumberFormat('fa-IR').format(data[selected].value)} امتیاز`}</p></div>}

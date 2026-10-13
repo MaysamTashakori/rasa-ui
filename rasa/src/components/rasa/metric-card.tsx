@@ -1,0 +1,3 @@
+'use client'
+import './rasa-ui.css'
+export function MetricCard({label='شاخص نمایشی',value=128,unit='امتیاز',series=[22,31,25,46,39,58,70]}:{label?:string;value?:number;unit?:string;series?:number[]}){const max=Math.max(...series,1);return <article className="rui-metric"><div><span>{label}</span><strong>{new Intl.NumberFormat('fa-IR').format(value)}<small>{unit}</small></strong></div><svg viewBox="0 0 160 60" role="img" aria-label="روند نمایشی"><polyline fill="none" stroke="currentColor" strokeWidth="3" strokeLinejoin="round" points={series.map((v,i)=>`${i*160/Math.max(series.length-1,1)},${57-v/max*50}`).join(' ')}/></svg></article>}

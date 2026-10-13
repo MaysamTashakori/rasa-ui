@@ -1,0 +1,4 @@
+'use client'
+import { useId,useState } from 'react'
+import './rasa-ui.css'
+export function PromptComposer({onSubmit}:{onSubmit?:(text:string)=>void}){const [text,setText]=useState(''),[sent,setSent]=useState(false),id=useId();return <form className="rui-composer" onSubmit={e=>{e.preventDefault();onSubmit?.(text);setSent(true)}}><label htmlFor={id}>از یک سؤال خوب شروع کن.</label><textarea id={id} value={text} maxLength={1000} placeholder="هدف و خروجی مورد انتظارت را بنویس…" onChange={e=>{setText(e.target.value);setSent(false)}}/><div><span>{new Intl.NumberFormat('fa-IR').format(text.length)} / ۱۰۰۰</span><button disabled={!text.trim()} type="submit">{onSubmit?'ارسال':'ثبت در نمونه'} ↗</button></div><p role="status">{sent?(onSubmit?'ارسال شد.':'متن در همین نمونه ثبت شد؛ به مدلی ارسال نمی‌شود.'):''}</p></form>}
